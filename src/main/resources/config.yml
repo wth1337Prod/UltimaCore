@@ -1,0 +1,449 @@
+  # UltimaCore - Продвинутый оптимизационный плагин для Spigot/Paper серверов
+# Версия: 1.0.0
+
+# Основные настройки плагина
+settings:
+  # Включить отладочный режим (больше сообщений в консоли)
+  debug: false
+  
+  # Язык плагина (доступно: ru, en)
+  language: ru
+  
+  # Интервал автосохранения конфигурации (в секундах, 0 - отключено)
+  auto_save_interval: 300
+  
+  # Максимальное время выполнения команд (в миллисекундах)
+  command_timeout: 30000
+
+# Настройки модулей
+modules:
+  # Модуль управления чанками "ChunkMaster"
+  chunkmaster:
+    # Включить модуль
+    enabled: true
+    
+    # Предзагрузка чанков при телепортации
+    preload_chunks_on_teleport: true
+    
+    # Радиус предзагрузки чанков (в чанках)
+    preload_radius: 3
+    
+    # Максимальный размер очереди загрузки чанков
+    max_queue_size: 500
+    
+    # Количество чанков, обрабатываемых за один тик
+    chunks_per_tick: 5
+    
+    # Интервал дефрагментации чанков (в тиках)
+    defrag_interval: 6000
+    
+    # Настройки анализа тяжёлых чанков
+    heavy_chunk_analysis_interval: 12000
+    heavy_chunk_threshold: 30
+    
+    # Настройки отложенной генерации структур
+    defer_structure_generation: true
+    structure_gen_per_tick: 1
+    
+    # Квоты чанков для различных измерений
+    dimension_quotas:
+      world: 3000        # Обычный мир
+      world_nether: 1500 # Нижний мир
+      world_the_end: 1000 # Край
+  
+  # Модуль оптимизации сущностей "EntityOptimizer"
+  entityoptimizer:
+    # Включить модуль
+    enabled: true
+    
+    # Динамические лимиты мобов
+    dynamic_limits_enabled: true
+    
+    # Интеллектуальное объединение AI
+    merge_ai_enabled: true
+    
+    # Оптимизация ферм
+    farm_optimization_enabled: true
+    
+    # Максимальное количество сущностей в чанке
+    max_entities_per_chunk: 50
+    
+    # Порог обнаружения ферм (количество одинаковых сущностей)
+    farm_detection_threshold: 30
+    
+    # Интервал сканирования сущностей (в тиках)
+    entity_scan_interval: 100
+    
+    # Максимальное количество дубликатов сущностей в области
+    max_duplicate_entities_per_area: 20
+    
+    # Лимиты сущностей по типам
+    entity_limits:
+      ZOMBIE: 25
+      SKELETON: 25
+      CREEPER: 15
+      SPIDER: 15
+      ITEM: 100
+      DROPPED_ITEM: 100
+      ARROW: 30
+      FALLING_BLOCK: 20
+      EXPERIENCE_ORB: 30
+    
+    # Интервалы обновления AI для разных уровней
+    ai_update_intervals:
+      FULL: 1
+      HIGH: 2
+      MEDIUM: 5
+      LOW: 10
+      MINIMAL: 20
+    
+    # Настройки для разных типов мобов
+    mob_settings:
+      passive:
+        ai_level: FULL
+        limit_multiplier: 1.0
+      hostile:
+        ai_level: NORMAL
+        limit_multiplier: 0.8
+      ambient:
+        ai_level: REDUCED
+        limit_multiplier: 0.5
+      water:
+        ai_level: NORMAL
+        limit_multiplier: 0.7
+  
+  # Модуль оптимизации редстоуна "RedstoneGenius"
+  redstonegenius:
+    # Включить модуль
+    enabled: true
+    
+    # Максимальное количество активаций редстоуна в чанке за тик
+    max_redstone_updates_per_chunk: 100
+    
+    # Ограничение активности редстоуновых часов (задержка между тиками)
+    clock_throttle_delay: 2
+    
+    # Максимальная длина цепочки редстоуна
+    max_redstone_chain_length: 100
+    
+    # Обнаружение и оптимизация часов
+    detect_and_optimize_clocks: true
+    
+    # Оптимизация редстоуновой пыли
+    optimize_redstone_dust: true
+    
+    # Интервал проверки редстоуновых схем (в тиках)
+    redstone_check_interval: 20
+    
+    # Настройки компонентов
+    components:
+      repeater:
+        priority: HIGH
+        optimize: true
+      comparator:
+        priority: HIGH
+        optimize: true
+      piston:
+        priority: NORMAL
+        optimize: true
+  
+  # Модуль многопоточности "ThreadMaster"
+  threadmaster:
+    # Включить модуль
+    enabled: true
+    
+    # Максимальное количество рабочих потоков
+    max_worker_threads: 4
+    
+    # Минимальное количество рабочих потоков
+    min_worker_threads: 1
+    
+    # Автоматическая балансировка потоков
+    auto_balance_threads: true
+    
+    # Интервал балансировки потоков (в тиках)
+    thread_balance_interval: 1200
+    
+    # Асинхронная загрузка чанков
+    async_chunk_loading: true
+    
+    # Асинхронная обработка тикета мира
+    async_world_ticking: false
+    
+    # Приоритеты задач
+    task_priorities:
+      chunk_loading: HIGH
+      entity_ai: NORMAL
+      redstone: NORMAL
+      physics: NORMAL
+  
+  # Модуль оптимизации памяти "MemoryGuard"
+  memoryguard:
+    # Включить модуль
+    enabled: true
+    
+    # Порог использования памяти для запуска сборки мусора (в процентах)
+    gc_threshold: 80
+    
+    # Интервал дефрагментации памяти (в тиках)
+    defrag_interval: 12000
+    
+    # Минимальный интервал между сборками мусора (в миллисекундах)
+    min_gc_interval: 60000
+    
+    # Автоматическая очистка кэша
+    auto_clean_cache: true
+    
+    # Интервал очистки кэша (в тиках)
+    cache_clean_interval: 6000
+    
+    # Максимальный размер кэша (в МБ)
+    max_cache_size: 512
+    
+    # Оптимизация памяти
+    gc_optimization: true
+    
+    # Порог предупреждения о низком уровне памяти
+    memory_warning_threshold: 85
+    
+    # Порог критического уровня памяти
+    memory_critical_threshold: 95
+    
+    # Интервал дефрагментации памяти
+    heap_defrag_interval: 12000
+    
+    # Обнаружение утечек памяти
+    leak_detection: true
+    
+    # Интервал очистки кэша
+    cache_cleanup_interval: 6000
+  
+  # Модуль физики и игровой механики "PhysicsOptimizer"
+  physicsoptimizer:
+    # Включить модуль
+    enabled: true
+    
+    # Оптимизация жидкостей
+    optimize_fluids: true
+    
+    # Максимальное количество обновлений жидкостей за тик
+    max_fluid_updates_per_tick: 1000
+    
+    # Ограничение падающих блоков
+    limit_falling_blocks: true
+    
+    # Максимальное количество падающих блоков в мире
+    max_falling_blocks: 500
+    
+    # Оптимизация расчета взрывов
+    optimize_explosions: true
+    
+    # Нейтрализация лаг-машин на основе физики
+    neutralize_physics_lag_machines: true
+    
+    # Оптимизация расчета взрывов
+    smart_explosions: true
+    
+    # Оптимизация гравитации
+    gravity_optimization: true
+    
+    # Настройки для разных миров
+    world_settings:
+      world:
+        physics_intensity: 1.0
+      world_nether:
+        physics_intensity: 0.8
+      world_the_end:
+        physics_intensity: 0.6
+  
+  # Модуль защиты от лагов "LagShield"
+  lagshield:
+    # Включить модуль
+    enabled: true
+    
+    # Автоматическое обнаружение лаг-машин
+    auto_detect_machines: true
+    
+    # Уровень защиты
+    protection_level: MODERATE  # LOW, MODERATE, HIGH, EXTREME
+    
+    # Предотвращение эксплойтов
+    exploit_prevention: true
+    
+    # Защита от DDoS
+    ddos_protection: true
+    
+    # Порог блокировки регионов
+    region_lock_threshold: 95
+    
+    # Действия при обнаружении лаг-машины
+    actions:
+      notify_admins: true
+      log_to_file: true
+      break_machine: true
+      warn_player: true
+      temp_ban: false
+  
+  # Модуль аналитики "PerformanceAnalytics"
+  performanceanalytics:
+    # Включить модуль
+    enabled: true
+    
+    # Интервал сбора статистики (в секундах)
+    stats_collection_interval: 300
+    
+    # Хранить историю производительности (в часах)
+    performance_history_days: 24
+    
+    # Анализ трендов производительности
+    analyze_performance_trends: true
+    
+    # Автоматическая генерация отчетов
+    auto_generate_reports: true
+    
+    # Интервал генерации отчетов (в секундах)
+    report_generation_interval: 86400
+    
+    # Машинное обучение для предсказания проблем
+    enable_ml_predictions: false
+    
+    # Настройки оповещений
+    alerts:
+      enabled: true
+      tps_threshold: 15
+      memory_threshold: 90
+      notify_console: true
+      notify_admins: true
+  
+  # Модуль оптимизации плагинов "PluginOptimizer"
+  pluginoptimizer:
+    # Включить модуль
+    enabled: true
+    
+    # Мониторинг плагинов
+    monitor_plugins: true
+    
+    # Интервал мониторинга плагинов (в секундах)
+    plugin_monitor_interval: 600
+    
+    # Автоматическая нейтрализация конфликтов
+    auto_neutralize_conflicts: true
+    
+    # Отключение неоптимальных хуков событий
+    disable_inefficient_event_hooks: true
+    
+    # Игнорировать плагины при оптимизации (список)
+    exclude_plugins:
+      - "EssentialsX"
+      - "WorldGuard"
+      - "LuckPerms"
+    
+    # Порог использования ресурсов
+    resource_usage_threshold: 20
+    
+    # Приоритизация событий
+    event_prioritization: true
+    
+    # Отложенная обработка событий
+    deferred_event_processing: true
+  
+  # Модуль сетевой оптимизации "NetworkOptimizer"
+  networkoptimizer:
+    # Включить модуль
+    enabled: true
+    
+    # Сжатие пакетов
+    compress_packets: true
+    
+    # Уровень сжатия (1-9, где 9 - максимальное сжатие)
+    compression_level: 5
+    
+    # Приоритизация важных пакетов
+    prioritize_important_packets: true
+    
+    # Асинхронная отправка несрочных данных
+    async_packet_sending: true
+    
+    # Максимальная пропускная способность на игрока (в КБ/с)
+    max_bandwidth_per_player: 1024
+    
+    # Кэширование частых пакетов
+    cache_frequent_packets: true
+    
+    # Сжатие пакетов
+    packet_compression: true
+    
+    # Приоритизация пакетов
+    packet_priority: true
+    
+    # Скорость пакетов
+    chunk_packet_rate: 100
+    
+    # Скорость пакетов сущностей
+    entity_packet_rate: 200
+    
+    # Оптимизация сети
+    bandwidth_optimization: true
+
+# Настройки алгоритмов оптимизации
+algorithms:
+  # Алгоритм дефрагментации
+  defragmentation:
+    # Метод дефрагментации (simple, advanced, aggressive)
+    method: "advanced"
+    
+    # Порог заполнения для запуска дефрагментации (в процентах)
+    threshold: 70
+    
+    # Максимальное время выполнения (в миллисекундах)
+    max_execution_time: 50
+  
+  # Алгоритм обнаружения аномалий
+  anomaly_detection:
+    # Метод обнаружения (statistical, ml, hybrid)
+    method: "statistical"
+    
+    # Чувствительность (1-10, где 10 - максимальная чувствительность)
+    sensitivity: 5
+    
+    # Интервал проверки (в тиках)
+    check_interval: 100
+
+# Настройки машинного обучения
+machine_learning:
+  # Включить машинное обучение
+  enabled: false
+  
+  # Интервал обучения (в часах)
+  training_interval: 24
+  
+  # Размер выборки для обучения
+  training_sample_size: 1000
+  
+  # Алгоритм обучения (random_forest, neural_network, svm)
+  algorithm: "random_forest"
+  
+  # Максимальное использование CPU для обучения (в процентах)
+  max_cpu_usage: 25
+
+# Настройки отладки
+debug:
+  # Расширенное логирование
+  verbose_logging: false
+  
+  # Логирование в файл
+  log_to_file: true
+  
+  # Максимальный размер файла лога (в МБ)
+  max_log_size: 10
+  
+  # Интервал очистки логов (в днях)
+  log_cleanup_interval: 7
+  
+  # Профилирование кода
+  code_profiling: false
+
+# Настройки команд
+commands:
+  confirm_timeout: 30  # в секундах
+  show_command_help: true 

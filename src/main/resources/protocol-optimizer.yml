@@ -1,0 +1,45 @@
+# Настройки модуля оптимизации протокола
+enabled: true
+debug-mode: false
+
+# Интервалы и задержки
+initial-packet-delay: 20
+action-optimization-interval: 500
+stats-collection-interval: 6000
+optimization-update-interval: 1200
+view-distance: 8
+
+# Настройки сжатия пакетов
+compress-packets: true
+compression-level: 6
+
+# Настройки оптимизации сущностей
+entity-optimization:
+  enabled: true
+  view-distance: 32
+  update-rate: 4
+
+# Настройки оптимизации блоков
+block-optimization:
+  enabled: true
+  max-queued-updates: 64
+  update-interval: 2
+
+# Настройки оптимизации движения
+movement-optimization:
+  enabled: true
+  update-rate: 2
+
+# Настройки фильтрации пакетов
+packet-filter:
+  enabled: true
+  blocked-types:
+    - ABILITIES # Частые обновления способностей игроков
+    - ARM_ANIMATION # Слишком частая анимация движения рук
+    - KEEP_ALIVE # Обрабатываются сервером автоматически
+    - ENTITY_VELOCITY # Слишком частые обновления скорости
+
+# Настройки асинхронной обработки
+async-processing:
+  enabled: true
+  threads: 2 

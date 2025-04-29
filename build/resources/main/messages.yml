@@ -1,0 +1,91 @@
+# Configuration file for UltimaCore messages
+# Use & for color codes. Example: &a for green
+# Gradients format: {#HEX>}text{#HEX<}
+# Rainbow format: {rainbow}text{/rainbow}
+
+# UltimaCore - конфигурация сообщений
+# Этот файл содержит все сообщения плагина и его модулей
+
+# Общие настройки
+settings:
+  prefix: '&8[&b&lUltima&f&lCore&8]'
+  # Префикс плагина для всех сообщений
+  
+  gradient:
+    enabled: true
+    # Настройки градиентов в важных сообщениях
+    highlight:
+      from: '4D94FF'  # Начальный цвет для подсветки ключевых слов (голубой)
+      to: '0066CC'    # Конечный цвет для подсветки (синий)
+    error:
+      from: 'FF4D4D'  # Начальный цвет для ошибок (светло-красный)
+      to: 'CC0000'    # Конечный цвет для ошибок (темно-красный)
+    success:
+      from: '4DFF4D'  # Начальный цвет для успешных сообщений (светло-зеленый)
+      to: '00CC00'    # Конечный цвет для успешных сообщений (темно-зеленый)
+    warning:
+      from: 'FFD700'  # Начальный цвет для предупреждений (золотой)
+      to: 'FFA500'    # Конечный цвет для предупреждений (оранжевый)
+
+# Ключевые слова для подсветки в сообщениях (применяется ко всем модулям)
+keywords:
+  - 'UltimaCore'
+  - 'модуль'
+  - 'включен'
+  - 'отключен'
+  - 'очистка'
+  - 'предупреждение'
+  - 'ошибка'
+
+# General messages
+general:
+  plugin-enable: '&aПлагин успешно включен'
+  plugin-disable: '&cПлагин отключен'
+  no-permission: '&cУ вас нет прав для использования этой команды'
+  player-only: '&cЭта команда доступна только для игроков'
+  console-only: '&cЭта команда доступна только для консоли'
+  config-reload: '&aКонфигурация перезагружена'
+  unknown-command: '&cНеизвестная команда. Используйте /help для справки'
+  command-usage: '&eИспользование: {usage}'
+
+# LagShield module messages
+lagshield:
+  module-enable: '&aМодуль LagShield включен'
+  module-disable: '&cМодуль LagShield отключен'
+  cleanup-start: '&eНачинается очистка сервера...'
+  cleanup-finish: '&aОчистка завершена. Удалено {entities} сущностей, {chunks} чанков, {items} предметов'
+  tps-warning: '&eПредупреждение: TPS упал до {tps}. Активированы меры по оптимизации'
+  memory-warning: '&eПредупреждение: использовано {memory}% памяти. Запущена очистка'
+  entity-limit-reached: '&cДостигнут лимит сущностей в чанке {chunk}. Удалено {count} сущностей'
+  cmd-stats: |-
+    &8------ &b&lСтатистика LagShield &8------
+    &fTPS: {tps}
+    &fПамять: {memory_used}/{memory_total} МБ ({memory_percent}%)
+    &fСущностей: {entities}
+    &fЧанков: {chunks}
+    &fПредметов: {items}
+  cmd-cleanup: '&aЗапущена ручная очистка сервера'
+  cmd-toggle: '&aМодуль {state} &aуспешно'
+
+# PhysicsOptimizer module messages
+physics:
+  module-enable: '&aМодуль PhysicsOptimizer включен'
+  module-disable: '&cМодуль PhysicsOptimizer отключен'
+  optimization-enabled: '&aОптимизация физики включена'
+  optimization-disabled: '&cОптимизация физики отключена'
+  stats-header: '&8------ &b&lСтатистика PhysicsOptimizer &8------'
+  stats-optimized-events: '&fОптимизированных событий: {events}'
+  stats-saved-calculations: '&fСэкономлено вычислений: {calculations}'
+  cmd-toggle: '&aМодуль {state} &aуспешно'
+  cmd-cleanup: '&aЗапущена очистка кэша физики'
+
+# PerformanceAnalytics module messages
+perfanalytics:
+  enabled: "{prefix}&aМодуль &e{#00AAFF>}PerformanceAnalytics{#55FFCC<} &aуспешно включен!"
+  disabled: "{prefix}&cМодуль &e{#00AAFF>}PerformanceAnalytics{#55FFCC<} &cвыключен!"
+  analytics_started: "{prefix}&aАнализ производительности начат..."
+  analytics_finished: "{prefix}&aАнализ производительности завершен!"
+  performance_report: "{prefix}&aОтчет о производительности:\n&bСреднее TPS: &e{avg_tps}\n&bМинимальное TPS: &e{min_tps}\n&bМаксимальное TPS: &e{max_tps}\n&bСреднее использование памяти: &e{avg_memory}MB\n&bНаиболее затратные чанки: &e{chunks_info}\n&bНаиболее затратные сущности: &e{entities_info}"
+  entity_report: "{prefix}&aИнформация о сущностях:\n{entities_report}"
+  chunk_report: "{prefix}&aИнформация о чанках:\n{chunks_report}"
+  tick_report: "{prefix}&aИнформация о тиках:\n&bПоследний тик: &e{last_tick}ms\n&bСредний тик: &e{avg_tick}ms\n&bНаибольший тик: &e{max_tick}ms" 

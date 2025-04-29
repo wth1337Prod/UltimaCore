@@ -1,0 +1,250 @@
+name: UltimaCore
+version: '1.0.0'
+main: me.wth.ultimaCore.UltimaCore
+api-version: '1.21'
+authors: [UltimaTeam]
+description: Продвинутый оптимизационный плагин для Spigot/Paper серверов
+website: https://ultimacore.net
+
+commands:
+  ultimacore:
+    description: Основная команда UltimaCore
+    usage: /ultimacore [reload|version|help]
+    aliases: [uc]
+  chunkmaster:
+    description: Управление чанками и их оптимизацией
+    usage: /chunkmaster [info|analyze|unload|load|priority|stats|defrag|structures]
+    permission: ultimacore.admin.chunkmaster
+  
+  memoryguard:
+    description: Управление памятью сервера
+    aliases: [mg, memory]
+    usage: /memoryguard <подкоманда> [аргументы]  
+    permission: ultimacore.memoryguard.admin
+
+  netoptimizer:
+    description: Управление оптимизацией сети
+    aliases: [no, netopt]
+    usage: /netoptimizer <подкоманда> [аргументы]
+    permission: ultimacore.networkoptimizer.admin
+    
+  pluginoptimizer:
+    description: Управление оптимизацией плагинов
+    aliases: [po, pluginopt]
+    usage: /pluginoptimizer <подкоманда> [аргументы]
+    permission: ultimacore.pluginoptimizer.admin
+    
+  threadmaster:
+    description: Управление потоками сервера
+    aliases: [tm, threads]
+    usage: /threadmaster <подкоманда> [аргументы]
+    permission: ultimacore.threadmaster.admin
+
+  performance:
+    description: Информация о производительности сервера
+    aliases: [perf, perfmon]
+    usage: /performance [info|analyze|history|report]
+    permission: ultimacore.performance.admin
+
+  physics:
+    description: Управление оптимизацией физики сервера
+    aliases: [phys, physopt]
+    usage: /physics [enable|disable|stats|cleanup]
+    permission: ultimacore.physics.admin
+
+  redstone:
+    description: Управление оптимизацией редстоуна
+    aliases: [rs, redsopt]
+    usage: /redstone [info|limit|clock|optimize|disable|enable]
+    permission: ultimacore.redstone.admin
+
+  protocol:
+    description: Управление оптимизацией сетевого протокола
+    aliases: [protocolopt, popt]
+    usage: /protocol [help|stats|enable|disable|reload|latency|filter|optimize|cleardata]
+    permission: ultimacore.protocol.use
+
+permissions:
+  ultimacore.*:
+    description: Разрешает использовать все функции плагина
+    children:
+      ultimacore.command.*: true
+      ultimacore.admin: true
+  
+  ultimacore.command.*:
+    description: Разрешает использовать все команды плагина
+    children:
+      ultimacore.command.base: true
+      ultimacore.command.status: true
+      ultimacore.command.analyze: true
+      ultimacore.command.profile: true
+      ultimacore.command.config: true
+      ultimacore.command.reload: true
+      ultimacore.servergui: true
+      ultimacore.modulesgui: true
+      
+  ultimacore.command.base:
+    description: Разрешает использовать базовую команду плагина
+    default: true
+    
+  ultimacore.command.status:
+    description: Разрешает просматривать статус сервера
+    default: op
+    
+  ultimacore.command.analyze:
+    description: Разрешает анализировать производительность
+    default: op
+    
+  ultimacore.command.profile:
+    description: Разрешает профилировать сервер
+    default: op
+    
+  ultimacore.command.config:
+    description: Разрешает изменять настройки плагина
+    default: op
+    
+  ultimacore.command.reload:
+    description: Разрешает перезагружать плагин
+    default: op
+    
+  ultimacore.servergui:
+    description: Разрешает открывать GUI статуса сервера
+    default: op
+    
+  ultimacore.modulesgui:
+    description: Разрешает открывать GUI модулей плагина
+    default: op
+    
+  ultimacore.admin:
+    description: Разрешает использовать административные функции
+    default: op
+
+  # Разрешения для модуля MemoryGuard
+  ultimacore.memoryguard.*:
+    description: Разрешает использовать все функции модуля MemoryGuard
+    children:
+      ultimacore.memoryguard.admin: true
+      ultimacore.memoryguard.warnings: true
+      ultimacore.memoryguard.nokick: true
+  
+  ultimacore.memoryguard.admin:
+    description: Разрешает управлять модулем MemoryGuard
+    default: op
+  
+  ultimacore.memoryguard.warnings:
+    description: Позволяет получать уведомления о состоянии памяти
+    default: op
+    
+  ultimacore.memoryguard.nokick:
+    description: Защищает от кика при нехватке памяти
+    default: op
+
+  # Разрешения для модуля NetworkOptimizer
+  ultimacore.networkoptimizer.*:
+    description: Разрешает использовать все функции модуля NetworkOptimizer
+    children:
+      ultimacore.networkoptimizer.admin: true
+      ultimacore.networkoptimizer.bypass: true
+  
+  ultimacore.networkoptimizer.admin:
+    description: Разрешает управлять модулем NetworkOptimizer
+    default: op
+  
+  ultimacore.networkoptimizer.bypass:
+    description: Отключает применение сетевых оптимизаций для игрока
+    default: op
+    
+  # Разрешения для модуля PluginOptimizer
+  ultimacore.pluginoptimizer.*:
+    description: Разрешает использовать все функции модуля PluginOptimizer
+    children:
+      ultimacore.pluginoptimizer.admin: true
+      ultimacore.pluginoptimizer.bypass: true
+
+  ultimacore.pluginoptimizer.admin:
+    description: Разрешает управлять модулем PluginOptimizer
+    default: op
+    
+  ultimacore.pluginoptimizer.bypass:
+    description: Исключает плагин из оптимизации
+    default: op
+    
+  # Разрешения для модуля ThreadMaster
+  ultimacore.threadmaster.*:
+    description: Разрешает использовать все функции модуля ThreadMaster
+    children:
+      ultimacore.threadmaster.admin: true
+      ultimacore.threadmaster.bypass: true
+      
+  ultimacore.threadmaster.admin:
+    description: Разрешает управлять модулем ThreadMaster
+    default: op
+    
+  ultimacore.threadmaster.bypass:
+    description: Отключает оптимизацию потоков для определенных операций
+    default: op
+
+  # Разрешения для модуля PerformanceAnalytics
+  ultimacore.performance.*:
+    description: Разрешает использовать все функции модуля PerformanceAnalytics
+    children:
+      ultimacore.performance.admin: true
+      ultimacore.performance.view: true
+      
+  ultimacore.performance.admin:
+    description: Разрешает управлять модулем PerformanceAnalytics
+    default: op
+    
+  ultimacore.performance.view:
+    description: Разрешает просматривать информацию о производительности
+    default: op
+
+  # Разрешения для модуля PhysicsOptimizer
+  ultimacore.physics.*:
+    description: Разрешает использовать все функции модуля PhysicsOptimizer
+    children:
+      ultimacore.physics.admin: true
+      ultimacore.physics.bypass: true
+      
+  ultimacore.physics.admin:
+    description: Разрешает управлять модулем PhysicsOptimizer
+    default: op
+    
+  ultimacore.physics.bypass:
+    description: Отключает оптимизацию физики для определенных событий
+    default: op
+
+  # Разрешения для модуля RedstoneGenius
+  ultimacore.redstone.*:
+    description: Разрешает использовать все функции модуля RedstoneGenius
+    children:
+      ultimacore.redstone.admin: true
+      ultimacore.redstone.bypass: true
+      ultimacore.redstone.notify: true
+      
+  ultimacore.redstone.admin:
+    description: Разрешает управлять модулем RedstoneGenius
+    default: op
+    
+  ultimacore.redstone.bypass:
+    description: Отключает ограничения на редстоун для определенных областей
+    default: op
+    
+  ultimacore.redstone.notify:
+    description: Получать уведомления о проблемных редстоун устройствах
+    default: op
+
+  # Разрешения для модуля ProtocolOptimizer
+  ultimacore.protocol.*:
+    description: Доступ ко всем функциям оптимизации протокола
+    children:
+      ultimacore.protocol.use: true
+      ultimacore.protocol.admin: true
+
+  ultimacore.protocol.use:
+    description: Позволяет использовать команду /protocol для просмотра статистики
+    default: op
+
+  ultimacore.protocol.admin:
+    description: Позволяет управлять оптимизацией протокола
+    default: op
